@@ -1,0 +1,58 @@
+generated: '2026-07-21'
+method: derived
+source:
+- openapi/zopa-account-info-openapi-original.yml
+- openapi/zopa-payment-initiation-openapi-original.yml
+standard: UK Open Banking Read/Write API Specification v4.0.0 (OBIE)
+authentication:
+  style: oauth2 + FAPI
+  flows:
+    - clientCredentials  # TPPOAuth2Security — TPP-to-ASPSP (create consents)
+    - authorizationCode  # PSUOAuth2Security — PSU authorises access/payment
+  scopes: [accounts, payments]
+  transport_security: mutual TLS (mTLS) between TPP and ASPSP (PSD2 / FAPI)
+  message_signing:
+    header: x-jws-signature
+    format: JWS detached signature (JOSE) over request/response payloads
+idempotency:
+  supported: true
+  header: x-idempotency-key
+  scope: payment-initiation write operations (CreateDomesticPayments, CreateDomesticStandingOrders, and consent creation)
+  semantics: >-
+    A TPP replays the same x-idempotency-key to safely retry a payment/consent
+    POST without creating a duplicate; a mismatched key/body yields 409 Conflict.
+request_tracing:
+  headers:
+    - x-fapi-interaction-id   # correlation id echoed by the ASPSP (FAPI)
+    - x-fapi-auth-date        # time the PSU last logged in to the TPP
+    - x-fapi-customer-ip-address
+    - x-customer-user-agent
+pagination:
+  style: link + meta (OBIE)
+  response_fields:
+    - Links.Self
+    - Links.First
+    - Links.Prev
+    - Links.Next
+    - Links.Last
+    - Meta.TotalPages
+  query_params: [fromBookingDateTime, toBookingDateTime, fromStatementDateTime, toStatementDateTime]
+versioning:
+  scheme: uri-path
+  current: v4.0
+  path_prefix:
+    account-info: /open-banking/v4.0/aisp
+    payment-initiation: /open-banking/v4.0/pisp
+error_envelope:
+  media_type: application/json
+  schema: OBErrorResponse1
+  see: errors/zopa-problem-types.yml
+content_types:
+  - application/json
+  - application/json; charset=utf-8
+  - application/jose+jwe   # encrypted response option
+cross_reference:
+  errors: errors/zopa-problem-types.yml
+  authentication: authentication/zopa-authentication.yml
+  scopes: scopes/zopa-scopes.yml
+  lifecycle: lifecycle/zopa-lifecycle.yml

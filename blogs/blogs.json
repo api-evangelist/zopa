@@ -1,0 +1,11 @@
+{
+  "repo": "zopa",
+  "feeds": [
+    {
+      "source": "https://www.zopa.com/open-banking-developer",
+      "error": "HTTPError"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-08-01T15:49:00Z"
+}

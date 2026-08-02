@@ -1,0 +1,83 @@
+generated: '2026-07-21'
+method: derived
+status: candidate
+source:
+- openapi/zopa-account-info-openapi-original.yml
+- openapi/zopa-payment-initiation-openapi-original.yml
+note: >-
+  No official Zopa MCP server found. This is a derived candidate tool list, one
+  tool per OpenAPI operation, for a future Open Banking MCP surface. Any real
+  deployment must front the ASPSP's mTLS + FAPI OAuth2 consent flow.
+server:
+  name: zopa-open-banking
+  transport: http
+tools:
+- name: create_account_access_consent
+  description: Create an account-access consent for a PSU
+  source_operation: openapi/zopa-account-info-openapi-original.yml#CreateAccountAccessConsents
+- name: get_account_access_consent
+  description: Retrieve an account-access consent
+  source_operation: openapi/zopa-account-info-openapi-original.yml#GetAccountAccessConsentsConsentId
+- name: delete_account_access_consent
+  description: Delete an account-access consent
+  source_operation: openapi/zopa-account-info-openapi-original.yml#DeleteAccountAccessConsentsConsentId
+- name: list_accounts
+  description: List accounts the PSU has consented to share
+  source_operation: openapi/zopa-account-info-openapi-original.yml#GetAccounts
+- name: get_account
+  description: Retrieve a single account
+  source_operation: openapi/zopa-account-info-openapi-original.yml#GetAccountsAccountId
+- name: get_account_balances
+  description: Retrieve balances for an account
+  source_operation: openapi/zopa-account-info-openapi-original.yml#GetAccountsAccountIdBalances
+- name: get_account_transactions
+  description: Retrieve transactions for an account
+  source_operation: openapi/zopa-account-info-openapi-original.yml#GetAccountsAccountIdTransactions
+- name: get_account_beneficiaries
+  description: Retrieve beneficiaries for an account
+  source_operation: openapi/zopa-account-info-openapi-original.yml#GetAccountsAccountIdBeneficiaries
+- name: get_account_direct_debits
+  description: Retrieve direct debits for an account
+  source_operation: openapi/zopa-account-info-openapi-original.yml#GetAccountsAccountIdDirectDebits
+- name: get_account_standing_orders
+  description: Retrieve standing orders for an account
+  source_operation: openapi/zopa-account-info-openapi-original.yml#GetAccountsAccountIdStandingOrders
+- name: get_account_statements
+  description: Retrieve statements for an account
+  source_operation: openapi/zopa-account-info-openapi-original.yml#GetAccountsAccountIdStatements
+- name: get_account_offers
+  description: Retrieve offers for an account
+  source_operation: openapi/zopa-account-info-openapi-original.yml#GetAccountsAccountIdOffers
+- name: get_account_party
+  description: Retrieve the party (account holder) for an account
+  source_operation: openapi/zopa-account-info-openapi-original.yml#GetAccountsAccountIdParty
+- name: get_party
+  description: Retrieve the party for the authorising PSU
+  source_operation: openapi/zopa-account-info-openapi-original.yml#GetParty
+- name: create_domestic_payment_consent
+  description: Create a domestic payment consent
+  source_operation: openapi/zopa-payment-initiation-openapi-original.yml#CreateDomesticPaymentConsents
+- name: get_domestic_payment_consent
+  description: Retrieve a domestic payment consent
+  source_operation: openapi/zopa-payment-initiation-openapi-original.yml#GetDomesticPaymentConsentsConsentId
+- name: get_domestic_payment_consent_funds_confirmation
+  description: Confirm funds availability for a domestic payment consent
+  source_operation: openapi/zopa-payment-initiation-openapi-original.yml#GetDomesticPaymentConsentsConsentIdFundsConfirmation
+- name: create_domestic_payment
+  description: Initiate a domestic payment against an authorised consent
+  source_operation: openapi/zopa-payment-initiation-openapi-original.yml#CreateDomesticPayments
+- name: get_domestic_payment
+  description: Retrieve a domestic payment
+  source_operation: openapi/zopa-payment-initiation-openapi-original.yml#GetDomesticPaymentsDomesticPaymentId
+- name: create_domestic_standing_order_consent
+  description: Create a domestic standing-order consent
+  source_operation: openapi/zopa-payment-initiation-openapi-original.yml#CreateDomesticStandingOrderConsents
+- name: get_domestic_standing_order_consent
+  description: Retrieve a domestic standing-order consent
+  source_operation: openapi/zopa-payment-initiation-openapi-original.yml#GetDomesticStandingOrderConsentsConsentId
+- name: create_domestic_standing_order
+  description: Initiate a domestic standing order against an authorised consent
+  source_operation: openapi/zopa-payment-initiation-openapi-original.yml#CreateDomesticStandingOrders
+- name: get_domestic_standing_order
+  description: Retrieve a domestic standing order
+  source_operation: openapi/zopa-payment-initiation-openapi-original.yml#GetDomesticStandingOrdersDomesticStandingOrderId

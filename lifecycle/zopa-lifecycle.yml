@@ -1,0 +1,29 @@
+generated: '2026-07-21'
+method: derived
+source:
+- openapi/zopa-account-info-openapi-original.yml
+- openapi/zopa-payment-initiation-openapi-original.yml
+- https://www.zopa.com/open-banking-developer
+versioning:
+  scheme: uri-path
+  current: v4.0
+  standard: UK Open Banking Read/Write API Specification (OBIE)
+  paths:
+    account-info: /open-banking/v4.0/aisp
+    payment-initiation: /open-banking/v4.0/pisp
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: >-
+    Version lifecycle is governed by the OBIE Read/Write standard release cadence
+    rather than a Zopa-published deprecation policy; no Sunset/Deprecation header
+    support is declared in the specs.
+sla:
+  url: null
+  note: ASPSP availability/performance is reported to the FCA/OBIE, not via a public SLA page.
+status_page: null
+deprecated_operations: []
+regulatory:
+  role: Account Servicing Payment Service Provider (ASPSP)
+  regulator: FCA / PRA (UK); Open Banking Implementation Entity (OBIE) standard
+tpp_onboarding: https://www.zopa.com/open-banking-developer

@@ -1,0 +1,30 @@
+generated: '2026-07-21'
+method: derived
+source:
+- openapi/zopa-account-info-openapi-original.yml
+- openapi/zopa-payment-initiation-openapi-original.yml
+- https://www.zopa.com/open-banking-developer
+standards:
+- id: oauth2
+  conforms: true
+  evidence: securitySchemes TPPOAuth2Security (clientCredentials) + PSUOAuth2Security (authorizationCode)
+- id: oidc
+  conforms: true
+  evidence: PSU authentication via OpenID Connect authorisation flows (ASPSP)
+- id: fapi
+  conforms: true
+  evidence: x-fapi-interaction-id / x-fapi-auth-date / x-fapi-customer-ip-address headers; mTLS; JWS request signing
+- id: psd2
+  conforms: true
+  evidence: Registered ASPSP exposing PSD2 AIS + PIS access to authorised TPPs
+- id: uk-open-banking-rw-4.0
+  conforms: true
+  evidence: OpenAPI titles/paths match OBIE Read/Write Account & Transaction and Payment Initiation v4.0.0
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: errors use OBErrorResponse1 (application/json), not application/problem+json
+- id: json-api
+  conforms: false
+compliance:
+  program: UK Open Banking / PSD2 (FCA-authorised, PRA-regulated bank & ASPSP)
+  docs: https://www.zopa.com/open-banking-developer

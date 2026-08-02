@@ -1,8 +1,27 @@
 aid: zopa
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/zopa.png
 name: zopa
-description: zopa is a company surfaced as a portfolio company of balderton-capital, bessemer-venture-partners,
-  hv-capital, northzone, qed-investors, softbank-vision-fund and added to the API Evangelist network as
-  a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: 'Zopa Bank is a UK FCA-authorised, PRA-regulated digital bank offering flexible savings,
+  personal loans, credit cards, car finance and the Biscuit current account. As a registered Account Servicing
+  Payment Service Provider (ASPSP), Zopa exposes UK Open Banking Read/Write v4.0.0 APIs to authorised
+  Third Party Providers: an Account & Transaction API (AIS) for consent-based access to accounts, balances,
+  transactions, statements, standing orders, direct debits, beneficiaries and party data, and a Payment
+  Initiation API (PIS) for domestic payments and standing orders. Access uses OAuth2 (client-credentials
+  for TPPs, authorization-code for PSUs) over mutual TLS with FAPI headers and JWS request signing. Zopa
+  was surfaced as a portfolio company of Balderton Capital, Bessemer Venture Partners, HV Capital, Northzone,
+  QED Investors and SoftBank Vision Fund.'
 url: https://raw.githubusercontent.com/api-evangelist/zopa/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -13,19 +32,234 @@ x-backed-by:
 - northzone
 - qed-investors
 - softbank-vision-fund
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: enriched
+x-tier-reason: open-banking-aspsp-surface-harvested
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
-apis: []
+- Banking
+- Fintech
+- Open Banking
+- PSD2
+- Payments
+- Account Information
+- Payment Initiation
+- FAPI
+- United Kingdom
+- Digital Bank
+- Lending
+apis:
+- aid: zopa:zopa-account-access-api
+  name: zopa Account Access API
+  description: The Account Access API from zopa — 2 operation(s) for account access.
+  humanURL: https://www.zopa.com/open-banking-developer
+  baseURL: https://developer.openbanking-sandbox.zopa.com/open-banking/v4.0/aisp
+  tags:
+  - Account Access
+  properties:
+  - type: OpenAPI
+    url: openapi/zopa-account-access-api-openapi.yml
+  - type: Documentation
+    url: https://www.zopa.com/open-banking-developer
+- aid: zopa:zopa-accounts-api
+  name: zopa Accounts API
+  description: The Accounts API from zopa — 2 operation(s) for accounts.
+  humanURL: https://www.zopa.com/open-banking-developer
+  baseURL: https://developer.openbanking-sandbox.zopa.com/open-banking/v4.0/aisp
+  tags:
+  - Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/zopa-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://www.zopa.com/open-banking-developer
+- aid: zopa:zopa-balances-api
+  name: zopa Balances API
+  description: The Balances API from zopa — 1 operation(s) for balances.
+  humanURL: https://www.zopa.com/open-banking-developer
+  baseURL: https://developer.openbanking-sandbox.zopa.com/open-banking/v4.0/aisp
+  tags:
+  - Balances
+  properties:
+  - type: OpenAPI
+    url: openapi/zopa-balances-api-openapi.yml
+  - type: Documentation
+    url: https://www.zopa.com/open-banking-developer
+- aid: zopa:zopa-beneficiaries-api
+  name: zopa Beneficiaries API
+  description: The Beneficiaries API from zopa — 1 operation(s) for beneficiaries.
+  humanURL: https://www.zopa.com/open-banking-developer
+  baseURL: https://developer.openbanking-sandbox.zopa.com/open-banking/v4.0/aisp
+  tags:
+  - Beneficiaries
+  properties:
+  - type: OpenAPI
+    url: openapi/zopa-beneficiaries-api-openapi.yml
+  - type: Documentation
+    url: https://www.zopa.com/open-banking-developer
+- aid: zopa:zopa-direct-debits-api
+  name: zopa Direct Debits API
+  description: The Direct Debits API from zopa — 1 operation(s) for direct debits.
+  humanURL: https://www.zopa.com/open-banking-developer
+  baseURL: https://developer.openbanking-sandbox.zopa.com/open-banking/v4.0/aisp
+  tags:
+  - Direct Debits
+  properties:
+  - type: OpenAPI
+    url: openapi/zopa-direct-debits-api-openapi.yml
+  - type: Documentation
+    url: https://www.zopa.com/open-banking-developer
+- aid: zopa:zopa-domestic-payments-api
+  name: zopa Domestic Payments API
+  description: The Domestic Payments API from zopa — 5 operation(s) for domestic payments.
+  humanURL: https://www.zopa.com/open-banking-developer
+  baseURL: https://developer.openbanking-sandbox.zopa.com/open-banking/v4.0/aisp
+  tags:
+  - Domestic Payments
+  properties:
+  - type: OpenAPI
+    url: openapi/zopa-domestic-payments-api-openapi.yml
+  - type: Documentation
+    url: https://www.zopa.com/open-banking-developer
+- aid: zopa:zopa-domestic-standing-orders-api
+  name: zopa Domestic Standing Orders API
+  description: >-
+    The Domestic Standing Orders API from zopa — 4 operation(s) for domestic standing orders.
+  humanURL: https://www.zopa.com/open-banking-developer
+  baseURL: https://developer.openbanking-sandbox.zopa.com/open-banking/v4.0/aisp
+  tags:
+  - Domestic Standing Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/zopa-domestic-standing-orders-api-openapi.yml
+  - type: Documentation
+    url: https://www.zopa.com/open-banking-developer
+- aid: zopa:zopa-offers-api
+  name: zopa Offers API
+  description: The Offers API from zopa — 1 operation(s) for offers.
+  humanURL: https://www.zopa.com/open-banking-developer
+  baseURL: https://developer.openbanking-sandbox.zopa.com/open-banking/v4.0/aisp
+  tags:
+  - Offers
+  properties:
+  - type: OpenAPI
+    url: openapi/zopa-offers-api-openapi.yml
+  - type: Documentation
+    url: https://www.zopa.com/open-banking-developer
+- aid: zopa:zopa-parties-api
+  name: zopa Parties API
+  description: The Parties API from zopa — 2 operation(s) for parties.
+  humanURL: https://www.zopa.com/open-banking-developer
+  baseURL: https://developer.openbanking-sandbox.zopa.com/open-banking/v4.0/aisp
+  tags:
+  - Parties
+  properties:
+  - type: OpenAPI
+    url: openapi/zopa-parties-api-openapi.yml
+  - type: Documentation
+    url: https://www.zopa.com/open-banking-developer
+- aid: zopa:zopa-standing-orders-api
+  name: zopa Standing Orders API
+  description: The Standing Orders API from zopa — 1 operation(s) for standing orders.
+  humanURL: https://www.zopa.com/open-banking-developer
+  baseURL: https://developer.openbanking-sandbox.zopa.com/open-banking/v4.0/aisp
+  tags:
+  - Standing Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/zopa-standing-orders-api-openapi.yml
+  - type: Documentation
+    url: https://www.zopa.com/open-banking-developer
+- aid: zopa:zopa-statements-api
+  name: zopa Statements API
+  description: The Statements API from zopa — 1 operation(s) for statements.
+  humanURL: https://www.zopa.com/open-banking-developer
+  baseURL: https://developer.openbanking-sandbox.zopa.com/open-banking/v4.0/aisp
+  tags:
+  - Statements
+  properties:
+  - type: OpenAPI
+    url: openapi/zopa-statements-api-openapi.yml
+  - type: Documentation
+    url: https://www.zopa.com/open-banking-developer
+- aid: zopa:zopa-transactions-api
+  name: zopa Transactions API
+  description: The Transactions API from zopa — 1 operation(s) for transactions.
+  humanURL: https://www.zopa.com/open-banking-developer
+  baseURL: https://developer.openbanking-sandbox.zopa.com/open-banking/v4.0/aisp
+  tags:
+  - Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/zopa-transactions-api-openapi.yml
+  - type: Documentation
+    url: https://www.zopa.com/open-banking-developer
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: AgenticAccess
+  url: agentic-access/zopa-agentic-access.yml
+- type: OAuthScopes
+  url: scopes/zopa-scopes.yml
+- type: Authentication
+  url: authentication/zopa-authentication.yml
+- type: DomainSecurity
+  url: security/zopa-domain-security.yml
 - type: Website
   url: https://www.zopa.com/
+- type: WellKnown
+  url: well-known/zopa-well-known.yml
+- type: SecurityTxt
+  url: well-known/zopa-security.txt
+- type: VulnerabilityDisclosure
+  url: security/zopa-vulnerability-disclosure.yml
+- type: Security
+  url: https://www.zopa.com/.well-known/security.txt
+- type: ErrorCatalog
+  url: errors/zopa-problem-types.yml
+- type: Conventions
+  url: conventions/zopa-conventions.yml
+- type: Idempotency
+  url: conventions/zopa-conventions.yml
+- type: Lifecycle
+  url: lifecycle/zopa-lifecycle.yml
+- type: Conformance
+  url: conformance/zopa-conformance.yml
+- type: Compliance
+  url: https://www.zopa.com/open-banking-developer
+- type: DataModel
+  url: data-model/zopa-data-model.yml
+- type: MCPServer
+  url: mcp/zopa-mcp.yml
+- type: LLMsTxt
+  url: llms/zopa-llms.txt
+- type: Sandbox
+  url: sandbox/zopa-sandbox.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: DeveloperPortal
+  url: https://developer.openbanking-sandbox.zopa.com/perry/developer/welcome
+- type: Documentation
+  url: https://www.zopa.com/open-banking-developer
+- type: Blog
+  url: https://www.zopa.com/blog
+- type: Support
+  url: https://www.zopa.com/help
+- type: Login
+  url: https://home.zopa.com
+- type: TermsOfService
+  url: https://www.zopa.com/terms-of-use
+- type: PrivacyPolicy
+  url: https://www.zopa.com/privacy-notice
+- type: Careers
+  url: https://careers.zopa.com/
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 22
+  pass: local-v1

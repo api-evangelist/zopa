@@ -1,0 +1,14 @@
+generated: '2026-07-21'
+method: generated
+source:
+- openapi/zopa-account-info-openapi-original.yml
+- openapi/zopa-payment-initiation-openapi-original.yml
+skills:
+- file: zopa-account-information.md
+  name: Retrieve Zopa account information (AIS)
+  api: openapi/zopa-account-info-openapi-original.yml
+  operations: [CreateAccountAccessConsents, GetAccountAccessConsentsConsentId, GetAccounts, GetAccountsAccountIdBalances, GetAccountsAccountIdTransactions]
+- file: zopa-initiate-domestic-payment.md
+  name: Initiate a Zopa domestic payment (PIS)
+  api: openapi/zopa-payment-initiation-openapi-original.yml
+  operations: [CreateDomesticPaymentConsents, GetDomesticPaymentConsentsConsentId, GetDomesticPaymentConsentsConsentIdFundsConfirmation, CreateDomesticPayments, GetDomesticPaymentsDomesticPaymentId]

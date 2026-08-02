@@ -1,0 +1,24 @@
+generated: '2026-07-21'
+method: searched
+source: https://www.zopa.com/open-banking-developer
+sandbox:
+  name: Zopa Open Banking Sandbox
+  developer_portal: https://developer.openbanking-sandbox.zopa.com/perry/developer/welcome
+  platform: Ozone (Open Banking model-bank sandbox connector)
+  environments:
+    - name: sandbox
+      purpose: Test AIS/PIS integration against a model bank before production
+    - name: production
+      purpose: Live ASPSP endpoints; requires an authorised TPP with eIDAS/OB certificates
+  onboarding_contact: openbanking-support@zopa.com
+  auth_model:
+    transport: mutual TLS (mTLS)
+    grant: OAuth2 clientCredentials (TPP) + authorizationCode (PSU) with OIDC
+    scopes: [accounts, payments]
+specs:
+  account-info: https://developer.openbanking-sandbox.zopa.com/swagger/account-info-openapi.yaml
+  payment-initiation: https://developer.openbanking-sandbox.zopa.com/swagger/payment-initiation-openapi.yaml
+note: >-
+  Sandbox access and test PSU/account fixtures are provisioned via the gated
+  developer portal after TPP registration; no public magic test values are
+  published on the open portal, so none are recorded here (no fabrication).

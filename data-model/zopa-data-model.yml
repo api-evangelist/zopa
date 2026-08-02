@@ -1,0 +1,78 @@
+generated: '2026-07-21'
+method: derived
+source:
+- openapi/zopa-account-info-openapi-original.yml
+- openapi/zopa-payment-initiation-openapi-original.yml
+entities:
+- name: AccountAccessConsent
+  id_field: ConsentId
+  api: account-info
+  relationships:
+  - has_many: Account
+    via: granted-scope
+- name: Account
+  id_field: AccountId
+  api: account-info
+  relationships:
+  - has_many: Balance
+    via: AccountId
+  - has_many: Transaction
+    via: AccountId
+  - has_many: Beneficiary
+    via: AccountId
+  - has_many: DirectDebit
+    via: AccountId
+  - has_many: StandingOrder
+    via: AccountId
+  - has_many: Statement
+    via: AccountId
+  - has_many: Offer
+    via: AccountId
+  - has_one: Party
+    via: AccountId
+- name: Balance
+  api: account-info
+  belongs_to: Account
+- name: Transaction
+  api: account-info
+  belongs_to: Account
+- name: Statement
+  api: account-info
+  belongs_to: Account
+- name: Beneficiary
+  api: account-info
+  belongs_to: Account
+- name: DirectDebit
+  api: account-info
+  belongs_to: Account
+- name: StandingOrder
+  api: account-info
+  belongs_to: Account
+- name: Party
+  api: account-info
+  belongs_to: Account
+- name: DomesticPaymentConsent
+  id_field: ConsentId
+  api: payment-initiation
+  relationships:
+  - has_one: DomesticPayment
+    via: ConsentId
+  - has_one: FundsConfirmation
+    via: ConsentId
+- name: DomesticPayment
+  id_field: DomesticPaymentId
+  api: payment-initiation
+  belongs_to: DomesticPaymentConsent
+- name: DomesticStandingOrderConsent
+  id_field: ConsentId
+  api: payment-initiation
+  relationships:
+  - has_one: DomesticStandingOrder
+    via: ConsentId
+- name: DomesticStandingOrder
+  id_field: DomesticStandingOrderId
+  api: payment-initiation
+  belongs_to: DomesticStandingOrderConsent
+notes: >-
+  Consent-first model: every data-access or payment action is gated by a prior
+  consent resource the PSU authorises. Derived from OBIE Read/Write v4.0 paths.

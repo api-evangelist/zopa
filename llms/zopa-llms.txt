@@ -1,0 +1,28 @@
+# Zopa
+
+> Zopa Bank is a UK FCA-authorised, PRA-regulated digital bank (savings, personal loans, credit cards, car finance, and the "Biscuit" current account). As a registered Account Servicing Payment Service Provider (ASPSP) it exposes UK Open Banking Read/Write v4.0.0 Account Information (AIS) and Payment Initiation (PIS) APIs to authorised Third Party Providers.
+
+## APIs
+
+- [Account & Transaction API (AIS)](https://developer.openbanking-sandbox.zopa.com/swagger/account-info-openapi.yaml): Read-only account, balance, transaction, statement, standing-order, direct-debit, beneficiary and party data under PSU consent.
+- [Payment Initiation API (PIS)](https://developer.openbanking-sandbox.zopa.com/swagger/payment-initiation-openapi.yaml): Initiate domestic payments and domestic standing orders under PSU consent, with funds confirmation.
+
+## Specs
+
+- [AIS OpenAPI 3.0 (v4.0.0)](openapi/zopa-account-info-openapi-original.yml)
+- [PIS OpenAPI 3.0 (v4.0.0)](openapi/zopa-payment-initiation-openapi-original.yml)
+
+## Auth & conventions
+
+- [Authentication profile](authentication/zopa-authentication.yml): OAuth2 clientCredentials (TPP) + authorizationCode (PSU) over mTLS, FAPI headers, JWS request signing.
+- [OAuth scopes](scopes/zopa-scopes.yml): accounts, payments.
+- [Conventions](conventions/zopa-conventions.yml): x-idempotency-key idempotency, x-fapi-interaction-id tracing, OBIE Links/Meta pagination, uri-path versioning.
+- [Error catalog](errors/zopa-problem-types.yml): OBErrorResponse1 envelope.
+- [Data model](data-model/zopa-data-model.yml): consent-first entity graph.
+
+## Docs
+
+- [Open Banking developer info](https://www.zopa.com/open-banking-developer)
+- [Sandbox developer portal](https://developer.openbanking-sandbox.zopa.com/perry/developer/welcome)
+- [Zopa website](https://www.zopa.com/)
+- [Security / VDP](https://www.zopa.com/.well-known/security.txt)

@@ -1,0 +1,12 @@
+# Captured from https://www.zopa.com/.well-known/security.txt (HTTP 200)
+# Retrieved 2026-07-21 via API Evangelist enrichment pipeline.
+# Field capture note: zopa.com fronts the site with bot-protection that
+# serves a placeholder to non-browser clients; the fields below were read
+# from the live document via an authenticated fetch. Expires/signature lines
+# present on the live file are not reproduced here.
+Contact: https://app.intigriti.com/programs/zopabank/zopavulnerabilitydisclosureprogram/detail
+Policy: Please submit all vulnerability reports via our VDP.
+Preferred-Languages: en
+Encryption: https://zopa.com/.well-known/pgp.asc
+Canonical: https://zopa.com/.well-known/security.txt
+Hiring: https://www.linkedin.com/company/zopa

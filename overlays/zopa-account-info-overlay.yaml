@@ -1,0 +1,15 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Zopa Account & Transaction API
+  version: 1.0.0
+extends: openapi/zopa-account-info-openapi-original.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-standard: UK Open Banking Read/Write v4.0.0 (OBIE)
+    x-apievangelist-role: ASPSP
+    x-apievangelist-conformance: [oauth2, oidc, fapi, psd2]
+- target: $.info
+  update:
+    x-idempotency: false
+    x-provider: zopa

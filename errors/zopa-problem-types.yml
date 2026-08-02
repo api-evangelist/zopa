@@ -1,0 +1,54 @@
+generated: '2026-07-21'
+method: derived
+source:
+- openapi/zopa-account-info-openapi-original.yml
+- openapi/zopa-payment-initiation-openapi-original.yml
+format: obie-error
+envelope:
+  media_type: application/json
+  schema: OBErrorResponse1
+  fields:
+    Code: High-level textual error code categorising the error (deprecated in v4)
+    Id: Unique reference for the error instance for audit / support
+    Message: Human-readable description of the top-level error
+    Errors: Array of OBError1 detail objects
+  detail_schema: OBError1
+  detail_fields:
+    ErrorCode: OBIE-namespaced error code (e.g. UK.OBIE.* / UK.OBIE.Field.*)
+    Message: Description of the specific field/rule error
+    Path: JSON path of the offending field (e.g. Data.Initiation.InstructedAmount.Currency)
+    Url: URL to remediation guidance
+# HTTP status surface derived from the response objects across both specs.
+problems:
+- status: 400
+  title: Bad Request
+  meaning: Request failed OBIE schema/field validation; see Errors[].Path
+  envelope: OBErrorResponse1
+- status: 401
+  title: Unauthorized
+  meaning: Missing/invalid access token or consent not authorised by the PSU
+- status: 403
+  title: Forbidden
+  meaning: Token lacks the required scope (accounts / payments) or consent revoked
+- status: 404
+  title: Not Found
+  meaning: Consent, account, or payment resource id does not exist
+- status: 405
+  title: Method Not Allowed
+- status: 406
+  title: Not Acceptable
+  meaning: Accept header not supported (application/json / application/jose+jwe)
+- status: 409
+  title: Conflict
+  meaning: Idempotency conflict or duplicate resource (payment-initiation only)
+  applies_to: [payment-initiation]
+- status: 415
+  title: Unsupported Media Type
+- status: 429
+  title: Too Many Requests
+  meaning: Rate limit exceeded
+- status: 500
+  title: Internal Server Error
+notes: >-
+  Errors follow the UK Open Banking Read/Write OBErrorResponse1 envelope, not
+  RFC 9457 problem+json. OBIE ErrorCode values are namespaced under UK.OBIE.*.

@@ -1,0 +1,337 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/zopa-account-info-openapi-original.yml, openapi/zopa-payment-initiation-openapi-original.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 23
+  by_action_class:
+    acting: 6
+    connected: 17
+  by_consequence:
+    write: 2
+    read: 17
+    physical: 4
+  human_in_the_loop_required: 0
+operations:
+- path: /account-access-consents
+  method: post
+  operationId: CreateAccountAccessConsents
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - accounts
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /account-access-consents/{ConsentId}
+  method: get
+  operationId: GetAccountAccessConsentsConsentId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accounts
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /account-access-consents/{ConsentId}
+  method: delete
+  operationId: DeleteAccountAccessConsentsConsentId
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - accounts
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /accounts
+  method: get
+  operationId: GetAccounts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accounts
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /accounts/{AccountId}
+  method: get
+  operationId: GetAccountsAccountId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accounts
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /accounts/{AccountId}/balances
+  method: get
+  operationId: GetAccountsAccountIdBalances
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accounts
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /accounts/{AccountId}/beneficiaries
+  method: get
+  operationId: GetAccountsAccountIdBeneficiaries
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accounts
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /accounts/{AccountId}/direct-debits
+  method: get
+  operationId: GetAccountsAccountIdDirectDebits
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accounts
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /accounts/{AccountId}/offers
+  method: get
+  operationId: GetAccountsAccountIdOffers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accounts
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /accounts/{AccountId}/party
+  method: get
+  operationId: GetAccountsAccountIdParty
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accounts
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /accounts/{AccountId}/standing-orders
+  method: get
+  operationId: GetAccountsAccountIdStandingOrders
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accounts
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /accounts/{AccountId}/statements
+  method: get
+  operationId: GetAccountsAccountIdStatements
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accounts
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /accounts/{AccountId}/transactions
+  method: get
+  operationId: GetAccountsAccountIdTransactions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accounts
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /party
+  method: get
+  operationId: GetParty
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accounts
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /domestic-payment-consents
+  method: post
+  operationId: CreateDomesticPaymentConsents
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - payments
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /domestic-payment-consents/{ConsentId}
+  method: get
+  operationId: GetDomesticPaymentConsentsConsentId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - payments
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /domestic-payment-consents/{ConsentId}/funds-confirmation
+  method: get
+  operationId: GetDomesticPaymentConsentsConsentIdFundsConfirmation
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - payments
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /domestic-payments
+  method: post
+  operationId: CreateDomesticPayments
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - payments
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /domestic-payments/{DomesticPaymentId}
+  method: get
+  operationId: GetDomesticPaymentsDomesticPaymentId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - payments
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /domestic-standing-order-consents
+  method: post
+  operationId: CreateDomesticStandingOrderConsents
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - payments
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /domestic-standing-order-consents/{ConsentId}
+  method: get
+  operationId: GetDomesticStandingOrderConsentsConsentId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - payments
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /domestic-standing-orders
+  method: post
+  operationId: CreateDomesticStandingOrders
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - payments
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /domestic-standing-orders/{DomesticStandingOrderId}
+  method: get
+  operationId: GetDomesticStandingOrdersDomesticStandingOrderId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - payments
+    token:
+      max-ttl: 3600
+    audit: none

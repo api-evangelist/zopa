@@ -1,0 +1,36 @@
+{
+  "provider": "zopa",
+  "sources": [
+    "zopa-account-access-api-openapi.yml",
+    "zopa-accounts-api-openapi.yml",
+    "zopa-balances-api-openapi.yml",
+    "zopa-beneficiaries-api-openapi.yml",
+    "zopa-direct-debits-api-openapi.yml",
+    "zopa-domestic-payments-api-openapi.yml",
+    "zopa-domestic-standing-orders-api-openapi.yml",
+    "zopa-offers-api-openapi.yml",
+    "zopa-parties-api-openapi.yml",
+    "zopa-standing-orders-api-openapi.yml",
+    "zopa-statements-api-openapi.yml",
+    "zopa-transactions-api-openapi.yml"
+  ],
+  "outputs": [
+    "zopa-account-access-api-openapi.yml",
+    "zopa-accounts-api-openapi.yml",
+    "zopa-balances-api-openapi.yml",
+    "zopa-beneficiaries-api-openapi.yml",
+    "zopa-direct-debits-api-openapi.yml",
+    "zopa-domestic-payments-api-openapi.yml",
+    "zopa-domestic-standing-orders-api-openapi.yml",
+    "zopa-offers-api-openapi.yml",
+    "zopa-parties-api-openapi.yml",
+    "zopa-standing-orders-api-openapi.yml",
+    "zopa-statements-api-openapi.yml",
+    "zopa-transactions-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
