@@ -202,6 +202,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/zopa-account-info-overlay.yaml
 - type: AgenticAccess
   url: agentic-access/zopa-agentic-access.yml
 - type: OAuthScopes
