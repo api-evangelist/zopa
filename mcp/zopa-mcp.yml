@@ -4,10 +4,9 @@ status: candidate
 source:
 - openapi/zopa-account-info-openapi-original.yml
 - openapi/zopa-payment-initiation-openapi-original.yml
-note: >-
-  No official Zopa MCP server found. This is a derived candidate tool list, one
-  tool per OpenAPI operation, for a future Open Banking MCP surface. Any real
-  deployment must front the ASPSP's mTLS + FAPI OAuth2 consent flow.
+note: No official Zopa MCP server found. This is a derived candidate tool list, one tool per OpenAPI operation,
+  for a future Open Banking MCP surface. Any real deployment must front the ASPSP's mTLS + FAPI OAuth2
+  consent flow.
 server:
   name: zopa-open-banking
   transport: http
@@ -81,3 +80,9 @@ tools:
 - name: get_domestic_standing_order
   description: Retrieve a domestic standing order
   source_operation: openapi/zopa-payment-initiation-openapi-original.yml#GetDomesticStandingOrdersDomesticStandingOrderId
+deployment:
+  mode: none
+  verified: derived
+  tools: 23
+  checked: '2026-08-12'
+  source: catalog MCP census
