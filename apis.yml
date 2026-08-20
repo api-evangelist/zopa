@@ -69,6 +69,8 @@ apis:
   humanURL: https://www.zopa.com/open-banking-developer
   baseURL: https://developer.openbanking-sandbox.zopa.com/open-banking/v4.0/aisp
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
@@ -190,6 +192,8 @@ apis:
   humanURL: https://www.zopa.com/open-banking-developer
   baseURL: https://developer.openbanking-sandbox.zopa.com/open-banking/v4.0/aisp
   tags:
+  - Transaction
+  tags_raw:
   - Transactions
   properties:
   - type: OpenAPI
