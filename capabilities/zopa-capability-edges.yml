@@ -1,0 +1,75 @@
+slug: zopa
+provider: zopa
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 6
+edges:
+- tag: Domestic Payments
+  spec_file: zopa-domestic-payments-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.9
+  evidence: POST /domestic-payment-consents CreateDomesticPaymentConsents; POST /domestic-payments CreateDomesticPayments;
+    GET .../funds-confirmation
+  reason: 'Open Banking PIS: capture, authorise (consent), funds-check and submit a domestic payment instruction
+    — plainly payment initiation.'
+- tag: Domestic Standing Orders
+  spec_file: zopa-domestic-standing-orders-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.85
+  evidence: POST /domestic-standing-orders CreateDomesticStandingOrders; OBWriteDomesticStandingOrderResponse6
+  reason: Initiation and consent capture for recurring domestic standing order payment instructions —
+    payment instruction capture and authorisation.
+- tag: Parties
+  spec_file: zopa-parties-api-openapi.yml
+  capability_id: BC-1300.40
+  capability_id_l1: BC-1300
+  capability_name: Customer Information Management
+  confidence: 0.78
+  evidence: GET /accounts/{AccountId}/party  Get Party; schemas OBParty2, FullLegalName, PartyId, OBInternalAccountRole1Code
+  reason: Open Banking Parties endpoint exposes the account-holder's identity/legal name and account role
+    — customer information for banking customers, i.e. Banking Customer Management / Customer Information
+    Management. Not KYC screening, just customer data retrieval.
+- tag: Standing Orders
+  spec_file: zopa-standing-orders-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.72
+  evidence: GET /accounts/{AccountId}/standing-orders  Get Standing Orders; schemas StandingOrderId, OBMandateRelatedInformation1,
+    OBBranchAndFinancialInstitutionIdentification5_1
+  reason: Standing orders are recurring payment instructions/mandates on a payment account; read access
+    to them sits within payment initiation/instruction management. Some ambiguity as it is read-only account
+    information rather than initiation.
+- tag: Accounts
+  spec_file: zopa-accounts-api-openapi.yml
+  capability_id: BC-1330.10
+  capability_id_l1: BC-1330
+  capability_name: Deposit Account Management
+  confidence: 0.7
+  evidence: GET /accounts GetAccounts; schemas OBReadAccount6, OBExternalAccountSubType1Code, OBInternalAccountStatus1Code
+  reason: Exposes bank account records (identification, sub-type, status) for a retail bank's deposit/current
+    accounts under Open Banking. Read-only account information sits in Deposit Account Management; ambiguity
+    as accounts may include credit cards/loans.
+- tag: Direct Debits
+  spec_file: zopa-direct-debits-api-openapi.yml
+  capability_id: BC-1340.30
+  capability_id_l1: BC-1340
+  capability_name: Clearing & Settlement Management
+  confidence: 0.7
+  evidence: GET /accounts/{AccountId}/direct-debits; schemas OBReadDirectDebit2, OBMandateRelatedInformation1,
+    ExternalMandateStatus1Code
+  reason: Direct debit mandates on a UK bank account (BACS DD) — clearing-rail mandate information; sits
+    within domestic clearing/payments management, though read-only account information.

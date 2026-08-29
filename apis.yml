@@ -218,6 +218,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/zopa-capability-edges.yml
+  name: zopa Business Capability Map
 - type: Overlay
   url: overlays/zopa-account-info-overlay.yaml
 - type: AgenticAccess
