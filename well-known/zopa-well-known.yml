@@ -2,19 +2,23 @@ generated: '2026-07-21'
 method: searched
 source: https://www.zopa.com/.well-known/security.txt
 host: https://www.zopa.com
-documents:
-- path: /.well-known/security.txt
-  status: 200
-  file: zopa-security.txt
-  note: RFC 9116; points to Intigriti VDP + PGP key
-- path: /.well-known/openid-configuration
-  status: 404
-- path: /.well-known/oauth-authorization-server
-  status: 404
-- path: /.well-known/api-catalog
-  status: 404
-- path: /.well-known/ai-plugin.json
-  status: 404
-# Open Banking sandbox host (developer.openbanking-sandbox.zopa.com) does not
-# expose /.well-known/openid-configuration at the developer-portal origin (404);
-# the ASPSP OIDC/mTLS auth-server discovery sits behind gated TPP onboarding.
+hosts:
+- host: https://www.zopa.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: zopa-security.txt
+    note: RFC 9116; points to Intigriti VDP + PGP key
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+x-shape-fix:
+  converted: '2026-08-20'
+  from: documents
+  note: Rewritten into hosts[] -> documents[], the only shape well_known_docs() in score.rb reads. A served
+    .well-known surface recorded in any other shape scores as absent.

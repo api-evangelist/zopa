@@ -1,18 +1,8 @@
 {
   "provider": "zopa",
   "sources": [
-    "zopa-account-access-api-openapi.yml",
-    "zopa-accounts-api-openapi.yml",
-    "zopa-balances-api-openapi.yml",
-    "zopa-beneficiaries-api-openapi.yml",
-    "zopa-direct-debits-api-openapi.yml",
-    "zopa-domestic-payments-api-openapi.yml",
-    "zopa-domestic-standing-orders-api-openapi.yml",
-    "zopa-offers-api-openapi.yml",
-    "zopa-parties-api-openapi.yml",
-    "zopa-standing-orders-api-openapi.yml",
-    "zopa-statements-api-openapi.yml",
-    "zopa-transactions-api-openapi.yml"
+    "_original/zopa-account-info-openapi-original.yml",
+    "_original/zopa-payment-initiation-openapi-original.yml"
   ],
   "outputs": [
     "zopa-account-access-api-openapi.yml",
@@ -20,17 +10,47 @@
     "zopa-balances-api-openapi.yml",
     "zopa-beneficiaries-api-openapi.yml",
     "zopa-direct-debits-api-openapi.yml",
-    "zopa-domestic-payments-api-openapi.yml",
-    "zopa-domestic-standing-orders-api-openapi.yml",
     "zopa-offers-api-openapi.yml",
     "zopa-parties-api-openapi.yml",
     "zopa-standing-orders-api-openapi.yml",
     "zopa-statements-api-openapi.yml",
-    "zopa-transactions-api-openapi.yml"
+    "zopa-transactions-api-openapi.yml",
+    "zopa-domestic-payments-api-openapi.yml",
+    "zopa-domestic-standing-orders-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "zopa-account-info-openapi-original.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "zopa-account-info-openapi-original.yml: declared missing tag: Account Access",
+    "zopa-account-info-openapi-original.yml: declared missing tag: Accounts",
+    "zopa-account-info-openapi-original.yml: declared missing tag: Balances",
+    "zopa-account-info-openapi-original.yml: declared missing tag: Beneficiaries",
+    "zopa-account-info-openapi-original.yml: declared missing tag: Direct Debits",
+    "zopa-account-info-openapi-original.yml: declared missing tag: Offers",
+    "zopa-account-info-openapi-original.yml: declared missing tag: Parties",
+    "zopa-account-info-openapi-original.yml: declared missing tag: Standing Orders",
+    "zopa-account-info-openapi-original.yml: declared missing tag: Statements",
+    "zopa-account-info-openapi-original.yml: declared missing tag: Transactions",
+    "zopa-payment-initiation-openapi-original.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "zopa-payment-initiation-openapi-original.yml: declared missing tag: Domestic Payments",
+    "zopa-payment-initiation-openapi-original.yml: declared missing tag: Domestic Standing Orders",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "zopa-account-access-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "zopa-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "zopa-balances-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "zopa-beneficiaries-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "zopa-direct-debits-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "zopa-domestic-payments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "zopa-domestic-standing-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "zopa-offers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "zopa-parties-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "zopa-standing-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "zopa-statements-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "zopa-transactions-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
