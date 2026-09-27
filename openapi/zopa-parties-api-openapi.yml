@@ -85,26 +85,191 @@ paths:
       - PSUOAuth2Security:
         - accounts
 components:
+  responses:
+    200AccountsAccountIdPartyRead:
+      description: Parties Read
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBReadParty2'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBReadParty2'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBReadParty2'
+    401Error:
+      description: Unauthorised
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    500Error:
+      description: Internal Server Error
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+    429Error:
+      description: Too Many Requests
+      headers:
+        Retry-After:
+          description: Number in seconds to wait
+          schema:
+            type: integer
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          schema:
+            type: string
+    404Error:
+      description: Not found
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    406Error:
+      description: Not Acceptable
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    200PartyRead:
+      description: Parties Read
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBReadParty2'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBReadParty2'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBReadParty2'
+    405Error:
+      description: Method Not Allowed
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    400Error:
+      description: Bad request
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+    403Error:
+      description: Forbidden
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
   schemas:
-    OBReadParty2:
-      type: object
-      required:
-      - Data
-      properties:
-        Data:
-          type: object
-          properties:
-            Party:
-              $ref: '#/components/schemas/OBParty2'
-        Links:
-          $ref: '#/components/schemas/Links'
-        Meta:
-          $ref: '#/components/schemas/Meta'
-      additionalProperties: false
-    ISODateTime:
-      description: "All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
+    OBInternalPartyType1Code:
+      description: Party type, in a coded form. For a full list see `OBInternalPartyType1Code` in *OB_Internal_CodeSet* [here](https://github.com/OpenBankingUK/External_Internal_CodeSets)
       type: string
-      format: date-time
+      example: Sole
+      enum:
+      - Delegate
+      - Joint
+      - Sole
+    OBExternalStatusReason1Code:
+      description: Low level textual error code, for all enum values see `ExternalReason1Code` [here](https://github.com/OpenBankingUK/External_Internal_CodeSets)
+      type: string
+      minLength: 4
+      maxLength: 4
+      example: AC17
+    Name_3:
+      description: Name by which a party is known and which is usually used to identify that party.
+      type: string
+      example: Mx Jane Smith
+      minLength: 1
+      maxLength: 350
+    Meta:
+      title: MetaData
+      type: object
+      description: Meta Data relevant to the payload
+      properties:
+        TotalPages:
+          type: integer
+          format: int32
+        FirstAvailableDateTime:
+          $ref: '#/components/schemas/ISODateTime'
+        LastAvailableDateTime:
+          $ref: '#/components/schemas/ISODateTime'
+      additionalProperties: false
+    OBInternalLegalStructureType1Code:
+      description: Legal standing of the party. For a full list refer to `OBInternalLegalStructureType1Code` in *OB_Internal_CodeSet* [here](https://github.com/OpenBankingUK/External_Internal_CodeSets)
+      type: string
+      example: UK.OBIE.Individual
+      x-namespaced-enum:
+      - UK.OBIE.CIC
+      - UK.OBIE.CIO
+      - UK.OBIE.Charity
+      - UK.OBIE.CoOp
+      - UK.OBIE.GeneralPartnership
+      - UK.OBIE.Individual
+      - UK.OBIE.LimitedLiabilityPartnership
+      - UK.OBIE.LimitedPartnership
+      - UK.OBIE.PrivateLimitedCompany
+      - UK.OBIE.PublicLimitedCompany
+      - UK.OBIE.ScottishLimitedPartnership
+      - UK.OBIE.Sole
     Links:
       type: object
       description: Links relevant to the payload
@@ -133,31 +298,48 @@ components:
       example: Jane Smith
       minLength: 1
       maxLength: 350
-    OBExternalStatusReason1Code:
-      description: Low level textual error code, for all enum values see `ExternalReason1Code` [here](https://github.com/OpenBankingUK/External_Internal_CodeSets)
-      type: string
-      minLength: 4
-      maxLength: 4
-      example: AC17
-    Meta:
-      title: MetaData
+    OBReadParty2:
       type: object
-      description: Meta Data relevant to the payload
+      required:
+      - Data
       properties:
-        TotalPages:
-          type: integer
-          format: int32
-        FirstAvailableDateTime:
-          $ref: '#/components/schemas/ISODateTime'
-        LastAvailableDateTime:
-          $ref: '#/components/schemas/ISODateTime'
+        Data:
+          type: object
+          properties:
+            Party:
+              $ref: '#/components/schemas/OBParty2'
+        Links:
+          $ref: '#/components/schemas/Links'
+        Meta:
+          $ref: '#/components/schemas/Meta'
       additionalProperties: false
-    Name_3:
-      description: Name by which a party is known and which is usually used to identify that party.
+    PartyId:
+      description: A unique and immutable identifier used to identify the customer resource. This identifier has no meaning to the account owner.
       type: string
-      example: Mx Jane Smith
+      example: PXSIF023
       minLength: 1
-      maxLength: 350
+      maxLength: 40
+    OBParty2:
+      type: object
+      required:
+      - PartyId
+      properties:
+        PartyId:
+          $ref: '#/components/schemas/PartyId'
+        PartyType:
+          $ref: '#/components/schemas/OBInternalPartyType1Code'
+        Name:
+          $ref: '#/components/schemas/Name_3'
+        FullLegalName:
+          $ref: '#/components/schemas/FullLegalName'
+        LegalStructure:
+          $ref: '#/components/schemas/OBInternalLegalStructureType1Code'
+        BeneficialOwnership:
+          description: A flag to indicate a party's beneficial ownership of the related account
+          type: boolean
+        AccountRole:
+          $ref: '#/components/schemas/OBInternalAccountRole1Code'
+      additionalProperties: false
     OBInternalAccountRole1Code:
       description: A party’s role with respect to the related account. For a full list refer to `OBInternalAccountRole1Code` in *OB_Internal_CodeSet* [here](https://github.com/OpenBankingUK/External_Internal_CodeSets)
       type: string
@@ -205,20 +387,6 @@ components:
       required:
       - Errors
       additionalProperties: false
-    PartyId:
-      description: A unique and immutable identifier used to identify the customer resource. This identifier has no meaning to the account owner.
-      type: string
-      example: PXSIF023
-      minLength: 1
-      maxLength: 40
-    OBInternalPartyType1Code:
-      description: Party type, in a coded form. For a full list see `OBInternalPartyType1Code` in *OB_Internal_CodeSet* [here](https://github.com/OpenBankingUK/External_Internal_CodeSets)
-      type: string
-      example: Sole
-      enum:
-      - Delegate
-      - Joint
-      - Sole
     OBError1:
       type: object
       properties:
@@ -243,184 +411,30 @@ components:
       - ErrorCode
       additionalProperties: false
       minProperties: 1
-    OBInternalLegalStructureType1Code:
-      description: Legal standing of the party. For a full list refer to `OBInternalLegalStructureType1Code` in *OB_Internal_CodeSet* [here](https://github.com/OpenBankingUK/External_Internal_CodeSets)
+    ISODateTime:
+      description: "All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
       type: string
-      example: UK.OBIE.Individual
-      x-namespaced-enum:
-      - UK.OBIE.CIC
-      - UK.OBIE.CIO
-      - UK.OBIE.Charity
-      - UK.OBIE.CoOp
-      - UK.OBIE.GeneralPartnership
-      - UK.OBIE.Individual
-      - UK.OBIE.LimitedLiabilityPartnership
-      - UK.OBIE.LimitedPartnership
-      - UK.OBIE.PrivateLimitedCompany
-      - UK.OBIE.PublicLimitedCompany
-      - UK.OBIE.ScottishLimitedPartnership
-      - UK.OBIE.Sole
-    OBParty2:
-      type: object
-      required:
-      - PartyId
-      properties:
-        PartyId:
-          $ref: '#/components/schemas/PartyId'
-        PartyType:
-          $ref: '#/components/schemas/OBInternalPartyType1Code'
-        Name:
-          $ref: '#/components/schemas/Name_3'
-        FullLegalName:
-          $ref: '#/components/schemas/FullLegalName'
-        LegalStructure:
-          $ref: '#/components/schemas/OBInternalLegalStructureType1Code'
-        BeneficialOwnership:
-          description: A flag to indicate a party's beneficial ownership of the related account
-          type: boolean
-        AccountRole:
-          $ref: '#/components/schemas/OBInternalAccountRole1Code'
-      additionalProperties: false
-  responses:
-    200AccountsAccountIdPartyRead:
-      description: Parties Read
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBReadParty2'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBReadParty2'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBReadParty2'
-    403Error:
-      description: Forbidden
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-    400Error:
-      description: Bad request
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-    406Error:
-      description: Not Acceptable
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-    401Error:
-      description: Unauthorised
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-    405Error:
-      description: Method Not Allowed
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-    429Error:
-      description: Too Many Requests
-      headers:
-        Retry-After:
-          description: Number in seconds to wait
-          schema:
-            type: integer
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          schema:
-            type: string
-    500Error:
-      description: Internal Server Error
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-    200PartyRead:
-      description: Parties Read
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBReadParty2'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBReadParty2'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBReadParty2'
-    404Error:
-      description: Not found
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
+      format: date-time
   parameters:
-    x-customer-user-agent:
+    x-fapi-interaction-id:
       in: header
-      name: x-customer-user-agent
-      description: Indicates the user-agent that the PSU is using.
+      name: x-fapi-interaction-id
       required: false
+      description: An RFC4122 UID used as a correlation id.
+      schema:
+        type: string
+    Authorization:
+      in: header
+      name: Authorization
+      required: true
+      description: An Authorisation Token as per https://tools.ietf.org/html/rfc6750
+      schema:
+        type: string
+    AccountId:
+      name: AccountId
+      in: path
+      description: AccountId
+      required: true
       schema:
         type: string
     x-fapi-auth-date:
@@ -431,18 +445,11 @@ components:
       schema:
         type: string
         pattern: ^(Mon|Tue|Wed|Thu|Fri|Sat|Sun), \d{2} (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4} \d{2}:\d{2}:\d{2} (GMT|UTC)$
-    AccountId:
-      name: AccountId
-      in: path
-      description: AccountId
-      required: true
-      schema:
-        type: string
-    Authorization:
+    x-customer-user-agent:
       in: header
-      name: Authorization
-      required: true
-      description: An Authorisation Token as per https://tools.ietf.org/html/rfc6750
+      name: x-customer-user-agent
+      description: Indicates the user-agent that the PSU is using.
+      required: false
       schema:
         type: string
     x-fapi-customer-ip-address:
@@ -450,13 +457,6 @@ components:
       name: x-fapi-customer-ip-address
       required: false
       description: The PSU's IP address if the PSU is currently logged in with the TPP.
-      schema:
-        type: string
-    x-fapi-interaction-id:
-      in: header
-      name: x-fapi-interaction-id
-      required: false
-      description: An RFC4122 UID used as a correlation id.
       schema:
         type: string
   securitySchemes:

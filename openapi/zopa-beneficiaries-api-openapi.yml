@@ -52,6 +52,120 @@ paths:
         - accounts
 components:
   schemas:
+    ExternalProxyAccountType1Code:
+      description: Specifies the external proxy account type code, as published in the proxy account type external code set.<br /> For more information and a full list of values see `ExternalProxyAccountType1Code` in *ISO_External_CodeSet* [here](https://github.com/OpenBankingUK/External_Internal_CodeSets)
+      type: string
+      example: TELE
+      enum:
+      - TELE
+      - EMAL
+      - DNAM
+      - CINC
+      - COTX
+      - COID
+      - CUST
+      - DRLC
+      - EIDN
+      - EWAL
+      - PVTX
+      - LEIC
+      - MBNO
+      - NIDN
+      - CCPT
+      - SHID
+      - SOSE
+      - TOKN
+      - UBIL
+      - VIPN
+      - BIID
+    OBExternalStatusReason1Code:
+      description: Low level textual error code, for all enum values see `ExternalReason1Code` [here](https://github.com/OpenBankingUK/External_Internal_CodeSets)
+      type: string
+      minLength: 4
+      maxLength: 4
+      example: AC17
+    StreetName:
+      description: Name of a street or thoroughfare.
+      type: string
+      example: Bank Street
+      minLength: 1
+      maxLength: 140
+    Identification_1:
+      description: Unique and unambiguous identification of the servicing institution.
+      type: string
+      example: '80200112344562'
+      minLength: 1
+      maxLength: 35
+    OBInternalAccountIdentification4Code:
+      description: Name of the identification scheme, in a coded form as published in an external list. <br /> For a full list of enumeration values refer to `OBInternalAccountIdentification4Code` in *OB_Internal_CodeSet* [here](https://github.com/OpenBankingUK/External_Internal_CodeSets)
+      type: string
+      x-namespaced-enum:
+      - UK.OBIE.BBAN
+      - UK.OBIE.IBAN
+      - UK.OBIE.PAN
+      - UK.OBIE.Paym
+      - UK.OBIE.SortCodeAccountNumber
+      - UK.OBIE.Wallet
+    PostCode:
+      description: Identifier consisting of a group of letters and/or numbers that is added to a postal address to assist the sorting of mail.
+      type: string
+      example: EC2N 4AG
+      minLength: 1
+      maxLength: 16
+    Meta:
+      title: MetaData
+      type: object
+      description: Meta Data relevant to the payload
+      properties:
+        TotalPages:
+          type: integer
+          format: int32
+        FirstAvailableDateTime:
+          $ref: '#/components/schemas/ISODateTime'
+        LastAvailableDateTime:
+          $ref: '#/components/schemas/ISODateTime'
+      additionalProperties: false
+    BuildingNumber:
+      description: Number that identifies the position of a building on a street.
+      type: string
+      example: '11'
+      minLength: 1
+      maxLength: 16
+    BeneficiaryId:
+      description: A unique and immutable identifier used to identify the beneficiary resource. This identifier has no meaning to the account owner.
+      type: string
+      example: Ben1
+      minLength: 1
+      maxLength: 40
+    OBCashAccount5_0:
+      type: object
+      required:
+      - SchemeName
+      - Identification
+      description: Provides the details to identify the beneficiary account.
+      properties:
+        SchemeName:
+          $ref: '#/components/schemas/OBInternalAccountIdentification4Code'
+        Identification:
+          $ref: '#/components/schemas/Identification_0'
+        Name:
+          $ref: '#/components/schemas/Name_0'
+        SecondaryIdentification:
+          $ref: '#/components/schemas/SecondaryIdentification'
+        Proxy:
+          $ref: '#/components/schemas/OBProxy1'
+    SecondaryIdentification:
+      description: "This is secondary identification of the account, as assigned by the account servicing institution. \nThis can be used by building societies to additionally identify accounts with a roll number (in addition to a sort code and account number combination)."
+      type: string
+      example: '87562298675897'
+      minLength: 1
+      maxLength: 34
+    OBInternalFinancialInstitutionIdentification4Code:
+      description: Name of the identification scheme, in a coded form as published in an external list.<br/> For a full list of enumeration values refer to `OBInternalFinancialInstitutionIdentification4Code` in *OB_Internal_CodeSet* [here](https://github.com/OpenBankingUK/External_Internal_CodeSets)
+      type: string
+      example: UK.OBIE.BICFI
+      x-namespaced-enum:
+      - UK.OBIE.BICFI
     OBPostalAddress7:
       type: object
       description: Information that locates and identifies a specific address, as defined by postal services.
@@ -112,61 +226,6 @@ components:
             maxLength: 70
           minItems: 0
           maxItems: 7
-    PostBox:
-      description: Information that locates and identifies a box in a post office assigned to a person or organization, where letters for them are kept until called for.
-      type: string
-      example: PO Box 123456
-      minLength: 1
-      maxLength: 16
-    LEI:
-      description: Legal entity identification as an alternate identification for a party. Legal Entity Identifier is a code allocated to a party as described in ISO 17442 "Financial Services - Legal Entity Identifier (LEI)".
-      type: string
-      example: IZ9Q00LZEVUKWCQY6X15
-      minLength: 1
-      maxLength: 20
-      pattern: ^[A-Z0-9]{18,18}[0-9]{2,2}$
-    BuildingNumber:
-      description: Number that identifies the position of a building on a street.
-      type: string
-      example: '11'
-      minLength: 1
-      maxLength: 16
-    ISODateTime:
-      description: "All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
-      type: string
-      format: date-time
-    Identification_0:
-      description: Identification assigned by an institution to identify an account. This identification is known by the account owner.
-      type: string
-      example: '80200112344562'
-      minLength: 1
-      maxLength: 256
-    Identification_1:
-      description: Unique and unambiguous identification of the servicing institution.
-      type: string
-      example: '80200112344562'
-      minLength: 1
-      maxLength: 35
-    UnitNumber:
-      description: Number that identifies the unit of a specific address .
-      type: string
-      example: A88
-      minLength: 1
-      maxLength: 16
-    Name_0:
-      description: 'The account name is the name or names of the account owner(s) represented at an account level, as displayed by the ASPSP''s online channels.
-
-        Note, the account name is not the product name or the nickname of the account.'
-      type: string
-      example: Jane Smith
-      minLength: 1
-      maxLength: 350
-    StreetName:
-      description: Name of a street or thoroughfare.
-      type: string
-      example: Bank Street
-      minLength: 1
-      maxLength: 140
     Links:
       type: object
       description: Links relevant to the payload
@@ -189,17 +248,55 @@ components:
       additionalProperties: false
       required:
       - Self
-    OBSupplementaryData1:
-      type: object
-      properties: {}
-      additionalProperties: true
-      description: Additional information that can not be captured in the structured fields and/or any other specific block.
-    AccountId:
-      description: A unique and immutable identifier used to identify the account resource. This identifier has no meaning to the account owner.
+    Identification_0:
+      description: Identification assigned by an institution to identify an account. This identification is known by the account owner.
       type: string
-      example: '22289'
+      example: '80200112344562'
       minLength: 1
-      maxLength: 40
+      maxLength: 256
+    OBProxy1:
+      description: Specifies an alternate assumed name for the identification of the account.
+      type: object
+      required:
+      - Identification
+      - Code
+      properties:
+        Identification:
+          description: Identification used to indicate the account identification under another specified name.
+          type: string
+          example: '2360549017905188'
+          minLength: 1
+          maxLength: 2048
+        Code:
+          $ref: '#/components/schemas/ExternalProxyAccountType1Code'
+        Type:
+          type: string
+          description: Type of the proxy identification.
+          minLength: 1
+          maxLength: 35
+    OBInternalBeneficiaryType1Code:
+      description: Specifies the Beneficiary Type.
+      type: string
+      example: Ordinary
+      enum:
+      - Trusted
+      - Ordinary
+    OBReadBeneficiary5:
+      type: object
+      required:
+      - Data
+      properties:
+        Data:
+          type: object
+          properties:
+            Beneficiary:
+              type: array
+              items:
+                $ref: '#/components/schemas/OBBeneficiary5'
+        Links:
+          $ref: '#/components/schemas/Links'
+        Meta:
+          $ref: '#/components/schemas/Meta'
     OBAddressType2Code:
       description: Identifies the nature of the postal address. <br /> For a full set of codes see `OBAddressType2Code` in *OB_Internal_CodeSet* [here](https://github.com/OpenBankingUK/External_Internal_CodeSets).
       type: string
@@ -213,54 +310,81 @@ components:
       - HOME
       - CORR
       - STAT
-    OBInternalFinancialInstitutionIdentification4Code:
-      description: Name of the identification scheme, in a coded form as published in an external list.<br/> For a full list of enumeration values refer to `OBInternalFinancialInstitutionIdentification4Code` in *OB_Internal_CodeSet* [here](https://github.com/OpenBankingUK/External_Internal_CodeSets)
+    BuildingName:
+      description: Name of a referenced building.
       type: string
-      example: UK.OBIE.BICFI
-      x-namespaced-enum:
-      - UK.OBIE.BICFI
-    OBInternalBeneficiaryType1Code:
-      description: Specifies the Beneficiary Type.
+      minLength: 1
+      maxLength: 140
+    Reference:
+      description: 'Unique reference, as assigned by the creditor, to unambiguously refer to the payment transaction.
+
+        Usage: If available, the initiating party should provide this reference in the structured remittance information, to enable reconciliation by the creditor upon receipt of the amount of money.
+
+        If the business context requires the use of a creditor reference or a payment remit identification, and only one identifier can be passed through the end-to-end chain, the creditor''s reference or payment remittance identification should be quoted in the end-to-end transaction identification.'
       type: string
-      example: Ordinary
-      enum:
-      - Trusted
-      - Ordinary
-    OBExternalStatusReason1Code:
-      description: Low level textual error code, for all enum values see `ExternalReason1Code` [here](https://github.com/OpenBankingUK/External_Internal_CodeSets)
+      example: Towbar Club
+      minLength: 1
+      maxLength: 35
+    AccountId:
+      description: A unique and immutable identifier used to identify the account resource. This identifier has no meaning to the account owner.
       type: string
-      minLength: 4
-      maxLength: 4
-      example: AC17
+      example: '22289'
+      minLength: 1
+      maxLength: 40
     Name_1:
       description: Name by which an agent is known and which is usually used to identify that agent.
       type: string
       example: Agent Name
       minLength: 1
       maxLength: 140
-    Floor:
-      description: Number that identifies the level within a building
+    OBBeneficiary5:
+      type: object
+      properties:
+        AccountId:
+          $ref: '#/components/schemas/AccountId'
+        BeneficiaryId:
+          $ref: '#/components/schemas/BeneficiaryId'
+        BeneficiaryType:
+          $ref: '#/components/schemas/OBInternalBeneficiaryType1Code'
+        Reference:
+          $ref: '#/components/schemas/Reference'
+        SupplementaryData:
+          $ref: '#/components/schemas/OBSupplementaryData1'
+        CreditorAgent:
+          $ref: '#/components/schemas/OBBranchAndFinancialInstitutionIdentification6_0'
+        CreditorAccount:
+          $ref: '#/components/schemas/OBCashAccount5_0'
+      additionalProperties: false
+    PostBox:
+      description: Information that locates and identifies a box in a post office assigned to a person or organization, where letters for them are kept until called for.
       type: string
-      example: '11'
+      example: PO Box 123456
+      minLength: 1
+      maxLength: 16
+    CareOf:
+      description: The 'care of' address is used whenever sending mail to a person or organisation who does not actually live or work at the address. They will receive the mail for the individual.
+      type: string
+      example: Jane Smith
+      minLength: 1
+      maxLength: 140
+    Name_0:
+      description: 'The account name is the name or names of the account owner(s) represented at an account level, as displayed by the ASPSP''s online channels.
+
+        Note, the account name is not the product name or the nickname of the account.'
+      type: string
+      example: Jane Smith
+      minLength: 1
+      maxLength: 350
+    Room:
+      description: Information that locates and identifies a room to form part of an address
+      type: string
+      example: Basement 03
       minLength: 1
       maxLength: 70
-    Meta:
-      title: MetaData
-      type: object
-      description: Meta Data relevant to the payload
-      properties:
-        TotalPages:
-          type: integer
-          format: int32
-        FirstAvailableDateTime:
-          $ref: '#/components/schemas/ISODateTime'
-        LastAvailableDateTime:
-          $ref: '#/components/schemas/ISODateTime'
-      additionalProperties: false
-    PostCode:
-      description: Identifier consisting of a group of letters and/or numbers that is added to a postal address to assist the sorting of mail.
+    UnitNumber:
+      description: Number that identifies the unit of a specific address .
       type: string
-      example: EC2N 4AG
+      example: A88
       minLength: 1
       maxLength: 16
     OBErrorResponse1:
@@ -292,158 +416,6 @@ components:
       required:
       - Errors
       additionalProperties: false
-    OBBeneficiary5:
-      type: object
-      properties:
-        AccountId:
-          $ref: '#/components/schemas/AccountId'
-        BeneficiaryId:
-          $ref: '#/components/schemas/BeneficiaryId'
-        BeneficiaryType:
-          $ref: '#/components/schemas/OBInternalBeneficiaryType1Code'
-        Reference:
-          $ref: '#/components/schemas/Reference'
-        SupplementaryData:
-          $ref: '#/components/schemas/OBSupplementaryData1'
-        CreditorAgent:
-          $ref: '#/components/schemas/OBBranchAndFinancialInstitutionIdentification6_0'
-        CreditorAccount:
-          $ref: '#/components/schemas/OBCashAccount5_0'
-      additionalProperties: false
-    DistrictName:
-      description: Number that of the regional area, known as a district, which forms part of an address
-      type: string
-      example: Greater London
-      minLength: 1
-      maxLength: 140
-    OBProxy1:
-      description: Specifies an alternate assumed name for the identification of the account.
-      type: object
-      required:
-      - Identification
-      - Code
-      properties:
-        Identification:
-          description: Identification used to indicate the account identification under another specified name.
-          type: string
-          example: '2360549017905188'
-          minLength: 1
-          maxLength: 2048
-        Code:
-          $ref: '#/components/schemas/ExternalProxyAccountType1Code'
-        Type:
-          type: string
-          description: Type of the proxy identification.
-          minLength: 1
-          maxLength: 35
-    OBBranchAndFinancialInstitutionIdentification6_0:
-      type: object
-      description: 'Party that manages the account on behalf of the account owner, that is manages the registration and booking of entries on the account, calculates balances on the account and provides information about the account.
-
-        This is the servicer of the beneficiary account.'
-      properties:
-        SchemeName:
-          $ref: '#/components/schemas/OBInternalFinancialInstitutionIdentification4Code'
-        Identification:
-          $ref: '#/components/schemas/Identification_1'
-        Name:
-          $ref: '#/components/schemas/Name_1'
-        PostalAddress:
-          $ref: '#/components/schemas/OBPostalAddress7'
-        LEI:
-          $ref: '#/components/schemas/LEI'
-    OBReadBeneficiary5:
-      type: object
-      required:
-      - Data
-      properties:
-        Data:
-          type: object
-          properties:
-            Beneficiary:
-              type: array
-              items:
-                $ref: '#/components/schemas/OBBeneficiary5'
-        Links:
-          $ref: '#/components/schemas/Links'
-        Meta:
-          $ref: '#/components/schemas/Meta'
-    OBCashAccount5_0:
-      type: object
-      required:
-      - SchemeName
-      - Identification
-      description: Provides the details to identify the beneficiary account.
-      properties:
-        SchemeName:
-          $ref: '#/components/schemas/OBInternalAccountIdentification4Code'
-        Identification:
-          $ref: '#/components/schemas/Identification_0'
-        Name:
-          $ref: '#/components/schemas/Name_0'
-        SecondaryIdentification:
-          $ref: '#/components/schemas/SecondaryIdentification'
-        Proxy:
-          $ref: '#/components/schemas/OBProxy1'
-    ExternalProxyAccountType1Code:
-      description: Specifies the external proxy account type code, as published in the proxy account type external code set.<br /> For more information and a full list of values see `ExternalProxyAccountType1Code` in *ISO_External_CodeSet* [here](https://github.com/OpenBankingUK/External_Internal_CodeSets)
-      type: string
-      example: TELE
-      enum:
-      - TELE
-      - EMAL
-      - DNAM
-      - CINC
-      - COTX
-      - COID
-      - CUST
-      - DRLC
-      - EIDN
-      - EWAL
-      - PVTX
-      - LEIC
-      - MBNO
-      - NIDN
-      - CCPT
-      - SHID
-      - SOSE
-      - TOKN
-      - UBIL
-      - VIPN
-      - BIID
-    SecondaryIdentification:
-      description: "This is secondary identification of the account, as assigned by the account servicing institution. \nThis can be used by building societies to additionally identify accounts with a roll number (in addition to a sort code and account number combination)."
-      type: string
-      example: '87562298675897'
-      minLength: 1
-      maxLength: 34
-    TownName:
-      description: Name of a built-up area, with defined boundaries, and a local government.
-      type: string
-      example: London
-      minLength: 1
-      maxLength: 140
-    Reference:
-      description: 'Unique reference, as assigned by the creditor, to unambiguously refer to the payment transaction.
-
-        Usage: If available, the initiating party should provide this reference in the structured remittance information, to enable reconciliation by the creditor upon receipt of the amount of money.
-
-        If the business context requires the use of a creditor reference or a payment remit identification, and only one identifier can be passed through the end-to-end chain, the creditor''s reference or payment remittance identification should be quoted in the end-to-end transaction identification.'
-      type: string
-      example: Towbar Club
-      minLength: 1
-      maxLength: 35
-    Room:
-      description: Information that locates and identifies a room to form part of an address
-      type: string
-      example: Basement 03
-      minLength: 1
-      maxLength: 70
-    BuildingName:
-      description: Name of a referenced building.
-      type: string
-      minLength: 1
-      maxLength: 140
     OBError1:
       type: object
       properties:
@@ -468,34 +440,76 @@ components:
       - ErrorCode
       additionalProperties: false
       minProperties: 1
-    BeneficiaryId:
-      description: A unique and immutable identifier used to identify the beneficiary resource. This identifier has no meaning to the account owner.
+    LEI:
+      description: Legal entity identification as an alternate identification for a party. Legal Entity Identifier is a code allocated to a party as described in ISO 17442 "Financial Services - Legal Entity Identifier (LEI)".
       type: string
-      example: Ben1
+      example: IZ9Q00LZEVUKWCQY6X15
       minLength: 1
-      maxLength: 40
-    CareOf:
-      description: The 'care of' address is used whenever sending mail to a person or organisation who does not actually live or work at the address. They will receive the mail for the individual.
+      maxLength: 20
+      pattern: ^[A-Z0-9]{18,18}[0-9]{2,2}$
+    ISODateTime:
+      description: "All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
       type: string
-      example: Jane Smith
+      format: date-time
+    Floor:
+      description: Number that identifies the level within a building
+      type: string
+      example: '11'
+      minLength: 1
+      maxLength: 70
+    DistrictName:
+      description: Number that of the regional area, known as a district, which forms part of an address
+      type: string
+      example: Greater London
       minLength: 1
       maxLength: 140
-    OBInternalAccountIdentification4Code:
-      description: Name of the identification scheme, in a coded form as published in an external list. <br /> For a full list of enumeration values refer to `OBInternalAccountIdentification4Code` in *OB_Internal_CodeSet* [here](https://github.com/OpenBankingUK/External_Internal_CodeSets)
+    OBSupplementaryData1:
+      type: object
+      properties: {}
+      additionalProperties: true
+      description: Additional information that can not be captured in the structured fields and/or any other specific block.
+    OBBranchAndFinancialInstitutionIdentification6_0:
+      type: object
+      description: 'Party that manages the account on behalf of the account owner, that is manages the registration and booking of entries on the account, calculates balances on the account and provides information about the account.
+
+        This is the servicer of the beneficiary account.'
+      properties:
+        SchemeName:
+          $ref: '#/components/schemas/OBInternalFinancialInstitutionIdentification4Code'
+        Identification:
+          $ref: '#/components/schemas/Identification_1'
+        Name:
+          $ref: '#/components/schemas/Name_1'
+        PostalAddress:
+          $ref: '#/components/schemas/OBPostalAddress7'
+        LEI:
+          $ref: '#/components/schemas/LEI'
+    TownName:
+      description: Name of a built-up area, with defined boundaries, and a local government.
       type: string
-      x-namespaced-enum:
-      - UK.OBIE.BBAN
-      - UK.OBIE.IBAN
-      - UK.OBIE.PAN
-      - UK.OBIE.Paym
-      - UK.OBIE.SortCodeAccountNumber
-      - UK.OBIE.Wallet
+      example: London
+      minLength: 1
+      maxLength: 140
   parameters:
-    x-customer-user-agent:
+    x-fapi-interaction-id:
       in: header
-      name: x-customer-user-agent
-      description: Indicates the user-agent that the PSU is using.
+      name: x-fapi-interaction-id
       required: false
+      description: An RFC4122 UID used as a correlation id.
+      schema:
+        type: string
+    Authorization:
+      in: header
+      name: Authorization
+      required: true
+      description: An Authorisation Token as per https://tools.ietf.org/html/rfc6750
+      schema:
+        type: string
+    AccountId:
+      name: AccountId
+      in: path
+      description: AccountId
+      required: true
       schema:
         type: string
     x-fapi-auth-date:
@@ -506,18 +520,11 @@ components:
       schema:
         type: string
         pattern: ^(Mon|Tue|Wed|Thu|Fri|Sat|Sun), \d{2} (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4} \d{2}:\d{2}:\d{2} (GMT|UTC)$
-    AccountId:
-      name: AccountId
-      in: path
-      description: AccountId
-      required: true
-      schema:
-        type: string
-    Authorization:
+    x-customer-user-agent:
       in: header
-      name: Authorization
-      required: true
-      description: An Authorisation Token as per https://tools.ietf.org/html/rfc6750
+      name: x-customer-user-agent
+      description: Indicates the user-agent that the PSU is using.
+      required: false
       schema:
         type: string
     x-fapi-customer-ip-address:
@@ -527,16 +534,17 @@ components:
       description: The PSU's IP address if the PSU is currently logged in with the TPP.
       schema:
         type: string
-    x-fapi-interaction-id:
-      in: header
-      name: x-fapi-interaction-id
-      required: false
-      description: An RFC4122 UID used as a correlation id.
-      schema:
-        type: string
   responses:
-    403Error:
-      description: Forbidden
+    401Error:
+      description: Unauthorised
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    500Error:
+      description: Internal Server Error
       headers:
         x-fapi-interaction-id:
           description: An RFC4122 UID used as a correlation id.
@@ -553,24 +561,25 @@ components:
         application/jose+jwe:
           schema:
             $ref: '#/components/schemas/OBErrorResponse1'
-    400Error:
-      description: Bad request
+    429Error:
+      description: Too Many Requests
+      headers:
+        Retry-After:
+          description: Number in seconds to wait
+          schema:
+            type: integer
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          schema:
+            type: string
+    404Error:
+      description: Not found
       headers:
         x-fapi-interaction-id:
           description: An RFC4122 UID used as a correlation id.
           required: true
           schema:
             type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
     406Error:
       description: Not Acceptable
       headers:
@@ -597,14 +606,6 @@ components:
         application/jose+jwe:
           schema:
             $ref: '#/components/schemas/OBReadBeneficiary5'
-    401Error:
-      description: Unauthorised
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
     405Error:
       description: Method Not Allowed
       headers:
@@ -613,19 +614,8 @@ components:
           required: true
           schema:
             type: string
-    429Error:
-      description: Too Many Requests
-      headers:
-        Retry-After:
-          description: Number in seconds to wait
-          schema:
-            type: integer
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          schema:
-            type: string
-    500Error:
-      description: Internal Server Error
+    400Error:
+      description: Bad request
       headers:
         x-fapi-interaction-id:
           description: An RFC4122 UID used as a correlation id.
@@ -642,14 +632,24 @@ components:
         application/jose+jwe:
           schema:
             $ref: '#/components/schemas/OBErrorResponse1'
-    404Error:
-      description: Not found
+    403Error:
+      description: Forbidden
       headers:
         x-fapi-interaction-id:
           description: An RFC4122 UID used as a correlation id.
           required: true
           schema:
             type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
   securitySchemes:
     TPPOAuth2Security:
       type: oauth2
